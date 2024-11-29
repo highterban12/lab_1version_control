@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="Style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валідація</title>
+    <style>
+        .valid {
+            border: 2px solid green;
+        }
+
+        .invalid {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Форма з валідацією</h2>
+
+<form id="myForm">
+    <label for="name">Ім'я:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Електронна адреса:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="password">Пароль:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <input type="submit" value="Надіслати">
+</form>
+
+<script>
+    document.getElementById("myForm").onsubmit = function() {
+        var isValid = true;
+        var name = document.getElementById("name");
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+
+        if (name.value.length < 2) {
+            name.classList.add("invalid");
+            isValid = false;
+        } else {
+            name.classList.remove("invalid");
+            name.classList.add("valid");
+        }
+
+        if (!email.value.includes("@") || !email.value.includes(".")) {
+            email.classList.add("invalid");
+            isValid = false;
+        } else {
+            email.classList.remove("invalid");
+            email.classList.add("valid");
+        }
+
+        if (password.value.length < 8 || !/\d/.test(password.value) || !/[a-zA-Z]/.test(password.value)) {
+            password.classList.add("invalid");
+            isValid = false;
+        } else {
+            password.classList.remove("invalid");
+            password.classList.add("valid");
+        }
+
+        return isValid;
+    };
+</script>
+
+</body>
+</html>
